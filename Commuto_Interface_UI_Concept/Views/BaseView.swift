@@ -19,8 +19,7 @@ struct BaseView: View {
     var body: some View {
         let sideBarWidth = getRect().width - 90
         NavigationView {
-            HStack(spacing: 0) {
-                SideMenu(showMenu: $showMenu, currentTab: $currentTab)
+            ZStack() {
                 VStack(spacing: 0) {
                     TabView(selection: $currentTab) {
                         Text("Offers")
@@ -62,12 +61,9 @@ struct BaseView: View {
                             }
                         }
                 )
+                SideMenu(showMenu: $showMenu, currentTab: $currentTab)
+                    .offset(x: -sideBarWidth + offset)
             }
-            .frame(width: getRect().width + sideBarWidth)
-            .offset(x: -sideBarWidth / 2)
-            .offset(x: offset)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
         }
         .animation(.easeOut, value: offset == 0)
         .onChange(of: showMenu) { newValue in
