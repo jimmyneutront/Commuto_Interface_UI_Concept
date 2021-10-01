@@ -22,7 +22,8 @@ struct BaseView: View {
             ZStack() {
                 VStack(spacing: 0) {
                     TabView(selection: $currentTab) {
-                        Text("Offers")
+                        //Text("Offers")
+                        OfferListView()
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
                             .tag("Offers")
