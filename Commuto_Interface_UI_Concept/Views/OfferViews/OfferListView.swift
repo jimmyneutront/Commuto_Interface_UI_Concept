@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OfferListView: View {
     
-    let maxHeight = UIScreen.main.bounds.height / 2.3
+    @State var maxHeight: CGFloat = 365//UIScreen.main.bounds.height / 2.3
+    var topBarSize = 0
     var topEdge: CGFloat = 0
     @State var topBarOffset: CGFloat = 0
     
@@ -93,21 +94,48 @@ struct OfferListView_Previews: PreviewProvider {
 }
 
 struct TopBar: View {
+    let sampleData: [CGFloat] = [1.00, 1.01, 1.03, 1.01, 0.99, 0.98, 0.99, 1.00, 1.03, 1.02, 1.01, 1.00, 0.99, 1.00, 1.02]
     @Binding var offset: CGFloat
     var maxHeight: CGFloat
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .center, spacing: 15) {
             Text("Offers")
                 .font(.largeTitle.bold())
-            Text("Some more text here")
-            Text(offset.description)
+                .opacity(Double(getTextOpacity()))
+            Text("Price History")
+                .font(.title3.bold())
+                .opacity(Double(getTextOpacity()))
+            Button {
+                
+            } label: {
+                HStack(spacing: 15) {
+                    Text("Coin")
+                    Image(systemName: "chevron.down")
+                }
+                .frame(width: 120, height: 40, alignment: .center)
+                .background(Color.white)
+                .clipShape(Capsule())
+                .foregroundColor(.black)
+                
+            }
+            .opacity(Double(getTextOpacity()))
+            LineGraph(data: sampleData)
+                .frame(height: 160)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .opacity(Double(getGraphOpacity()))
         }
         .padding()
-        .opacity(Double(getOpacity()))
     }
     
-    func getOpacity() -> CGFloat {
+    func getGraphOpacity() -> CGFloat {
         let progress = -offset / 150
+        let opacity = 1 - progress
+        return offset < 0 ? opacity : 1
+    }
+    
+    func getTextOpacity() -> CGFloat {
+        let progress = -offset / 100
         let opacity = 1 - progress
         return offset < 0 ? opacity : 1
     }
