@@ -42,7 +42,7 @@ struct LineGraph: View {
                         .padding(.horizontal, 10)
                         .background(Color.gray.opacity(0.2))
                         .clipShape(RoundedRectangle(cornerRadius: 50))
-                        .offset(x: translation < 10 ? 30: 0, y: translation < 10 ? 30 : 0)
+                        .offset(x: translation < 10 ? 30: 0, y: translation < 70 ? 30 : 0)
                         .offset(x: translation > (proxy.size.width - 10) ? -30 : 0)
                         .offset(x: graphLineOffset.width)
                         .offset(y: -105)

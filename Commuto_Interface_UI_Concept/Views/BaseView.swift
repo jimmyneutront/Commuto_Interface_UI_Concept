@@ -27,7 +27,7 @@ struct BaseView: View {
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
                             .tag("Offers")
-                        Text("Swaps")
+                        SwapListView()
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
                             .tag("Swaps")

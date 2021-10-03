@@ -1,15 +1,14 @@
 //
-//  OfferListView.swift
+//  SwapListView.swift
 //  Commuto_Interface_UI_Concept
 //
-//  Created by James Telzrow on 9/30/21.
+//  Created by James Telzrow on 10/2/21.
 //
 
 import SwiftUI
 
-struct OfferListView: View {
-    
-    @State var maxHeight: CGFloat = 365//UIScreen.main.bounds.height / 2.3
+struct SwapListView: View {
+    @State var maxHeight: CGFloat = 275//UIScreen.main.bounds.height / 2.3
     var topBarSize = 0
     var topEdge: CGFloat = 0
     @State var topBarOffset: CGFloat = 0
@@ -18,7 +17,7 @@ struct OfferListView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 15) {
                 GeometryReader { proxy in
-                    OfferTopBar(offset: $topBarOffset, maxHeight: maxHeight)
+                    SwapTopBar(offset: $topBarOffset, maxHeight: maxHeight)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .frame(height: getHeaderHeight(), alignment: .bottom)
                     .background(
@@ -39,17 +38,8 @@ struct OfferListView: View {
                                 }
                                 .padding(.horizontal)
                                 Spacer()
-                                Button {
-                                    
-                                } label: {
-                                    Text("Create")
-                                        .frame(width: 60, height: 22)
-                                        .font(.title3)
-                                        .foregroundColor(.primary)
-                                }
-                                .padding(.horizontal)
                             }
-                            Text("Offers")
+                            Text("Swaps")
                                 .frame(width: 70, height: 22)
                                 .font(.title2.bold())
                                 .foregroundColor(.primary)
@@ -65,7 +55,7 @@ struct OfferListView: View {
                 .zIndex(1)
                 VStack(spacing: 15) {
                     ForEach(0..<15) {_ in
-                        OfferSummaryCardView(offer: "Offer")
+                        OfferSummaryCardView(offer: "Swap")
                     }
                 }
                 .zIndex(0)
@@ -87,71 +77,58 @@ struct OfferListView: View {
     }
 }
 
-struct OfferListView_Previews: PreviewProvider {
+struct SwapListView_Previews: PreviewProvider {
     static var previews: some View {
-        OfferListView()
+        SwapListView()
     }
 }
 
-struct OfferTopBar: View {
-    let sampleData: [CGFloat] = [1.00, 1.01, 1.03, 1.01, 0.99, 0.98, 0.99, 1.00, 1.03, 1.02, 1.01, 1.00, 0.99, 1.00, 1.02]
+struct SwapTopBar: View {
     @Binding var offset: CGFloat
     var maxHeight: CGFloat
     var body: some View {
-        VStack(alignment: .center, spacing: 15) {
-            Text("Offers")
+        VStack(alignment: .center, spacing: 0) {
+            Text("Swaps")
                 .font(.largeTitle.bold())
-                .opacity(Double(getTextOpacity()))
-            Text("Price History")
-                .font(.title3.bold())
-                .opacity(Double(getTextOpacity()))
-            Button {
-                
-            } label: {
-                HStack(spacing: 15) {
-                    Text("Coin")
-                    Image(systemName: "chevron.down")
-                }
-                .frame(width: 120, height: 40, alignment: .center)
-                .background(Color.white)
-                .clipShape(Capsule())
-                .foregroundColor(.black)
-                
+            Spacer()
+                .frame(height: 10)
+            HStack {
+                Text("Open Swaps:")
+                    .font(.title3.bold())
+                Spacer()
             }
-            .opacity(Double(getTextOpacity()))
-            LineGraph(data: sampleData)
-                .frame(height: 160)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .opacity(Double(getGraphOpacity()))
+            HStack {
+                Text("7")
+                    .font(.title.bold())
+                Spacer()
+            }
+            HStack {
+                Text("Open Volume:")
+                    .font(.title3.bold())
+                Spacer()
+            }
+            HStack {
+                Text("$ 1,350.97")
+                    .font(.title.bold())
+                Spacer()
+            }
+            HStack {
+                Text("Disputed Swaps:")
+                    .font(.title3.bold())
+                Spacer()
+            }
+            HStack {
+                Text("2")
+                    .font(.title.bold())
+                Spacer()
+            }
         }
         .padding()
+        .opacity(Double(getOpacity()))
     }
-    
-    func getGraphOpacity() -> CGFloat {
-        let progress = -offset / 150
+    func getOpacity() -> CGFloat {
+        let progress = -offset * 3 / 100
         let opacity = 1 - progress
         return offset < 0 ? opacity : 1
-    }
-    
-    func getTextOpacity() -> CGFloat {
-        let progress = -offset / 100
-        let opacity = 1 - progress
-        return offset < 0 ? opacity : 1
-    }
-}
-
-struct OfferSummaryCardView: View {
-    var offer: String
-    var body: some View {
-        HStack(spacing: 15) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 30.0)
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 75)
-                Text(offer)
-            }
-        }
-        .padding(.horizontal)
     }
 }
