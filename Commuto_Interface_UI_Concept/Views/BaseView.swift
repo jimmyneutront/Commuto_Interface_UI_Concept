@@ -34,6 +34,10 @@ struct BaseView: View {
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
                             .tag("Balance")
+                        PaymentAccountListView()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationBarHidden(true)
+                            .tag("Payment Accounts")
                     }
                     VStack(spacing: 0){
                         Divider()
