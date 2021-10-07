@@ -22,7 +22,6 @@ struct BaseView: View {
             ZStack() {
                 VStack(spacing: 0) {
                     TabView(selection: $currentTab) {
-                        //Text("Offers")
                         OfferListView()
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
@@ -31,10 +30,10 @@ struct BaseView: View {
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
                             .tag("Swaps")
-                        Text("Funds")
+                        FundsView()
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationBarHidden(true)
-                            .tag("Funds")
+                            .tag("Balance")
                     }
                     VStack(spacing: 0){
                         Divider()
@@ -42,7 +41,7 @@ struct BaseView: View {
                             TabButton(label: "More", tab: "Sidebar")
                             TabButton(label: "Offers", tab: "Offers")
                             TabButton(label: "Swaps", tab: "Swaps")
-                            TabButton(label: "$", tab: "Funds")
+                            TabButton(label: "$", tab: "Balance")
                         }
                         .padding([.top, .bottom], 15)
                     }

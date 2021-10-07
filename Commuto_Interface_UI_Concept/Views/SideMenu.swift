@@ -36,7 +36,7 @@ struct SideMenu: View {
                 VStack(alignment: .leading, spacing: 45) {
                     TabButton(title: "Offers")
                     TabButton(title: "Swaps")
-                    TabButton(title: "Funds")
+                    TabButton(title: "Balance")
                     TabButton(title: "Payment Accounts")
                     TabButton(title: "Governance")
                     TabButton(title: "Settings")

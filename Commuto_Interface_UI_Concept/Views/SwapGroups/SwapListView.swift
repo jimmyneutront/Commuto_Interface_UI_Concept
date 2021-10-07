@@ -108,7 +108,7 @@ struct SwapTopBar: View {
                 Spacer()
             }
             HStack {
-                Text("$ 1,350.97")
+                Text("1,350.97")
                     .font(.title.bold())
                 Spacer()
             }
