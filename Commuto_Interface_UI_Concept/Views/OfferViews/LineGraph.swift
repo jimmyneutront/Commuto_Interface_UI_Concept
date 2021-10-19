@@ -2,7 +2,7 @@
 //  LineGraph.swift
 //  Commuto_Interface_UI_Concept
 //
-//  Created by James Telzrow on 10/1/21.
+//  Created by jimmyneutront on 10/1/21.
 //
 
 import SwiftUI

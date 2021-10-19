@@ -1,23 +1,22 @@
 //
-//  SwapListView.swift
+//  GovernanceMainView.swift
 //  Commuto_Interface_UI_Concept
 //
-//  Created by jimmyneutront on 10/2/21.
+//  Created by jimmyneutront on 10/7/21.
 //
 
 import SwiftUI
 
-struct SwapListView: View {
-    @State var maxHeight: CGFloat = 275//UIScreen.main.bounds.height / 2.3
+struct GovernanceMainView: View {
+    @State var maxHeight: CGFloat = 275
     var topBarSize = 0
     var topEdge: CGFloat = 0
     @State var topBarOffset: CGFloat = 0
-    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 15) {
                 GeometryReader { proxy in
-                    SwapTopBar(offset: $topBarOffset, maxHeight: maxHeight)
+                    GovernanceTopBar()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .frame(height: getHeaderHeight(), alignment: .bottom)
                     .background(
@@ -39,7 +38,7 @@ struct SwapListView: View {
                                 .padding(.horizontal)
                                 Spacer()
                             }
-                            Text("Swaps")
+                            Text("Proposals")
                                 .frame(width: 70, height: 22)
                                 .font(.title2.bold())
                                 .foregroundColor(.primary)
@@ -62,73 +61,28 @@ struct SwapListView: View {
             }
             .modifier(TopBarOffsetModifier(offset: $topBarOffset))
         }
-        .coordinateSpace(name: "SCROLL")
         .ignoresSafeArea(.all, edges: .top)
     }
-    
     func getHeaderHeight() -> CGFloat {
         let topHeight = maxHeight + topBarOffset
         return topHeight > (100 + topEdge) ? topHeight : (100 + topEdge)
     }
-    
     func topBarTitleOpacity () -> CGFloat {
         let progress = -(topBarOffset + 60) / (maxHeight - (80 + topEdge))
         return progress
     }
 }
 
-struct SwapListView_Previews: PreviewProvider {
+struct GovernanceMainView_Previews: PreviewProvider {
     static var previews: some View {
-        SwapListView()
+        GovernanceMainView()
     }
 }
 
-struct SwapTopBar: View {
-    @Binding var offset: CGFloat
-    var maxHeight: CGFloat
+struct GovernanceTopBar: View {
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            Text("Swaps")
-                .font(.largeTitle.bold())
-            Spacer()
-                .frame(height: 10)
-            HStack {
-                Text("Open Swaps:")
-                    .font(.title3.bold())
-                Spacer()
-            }
-            HStack {
-                Text("7")
-                    .font(.title.bold())
-                Spacer()
-            }
-            HStack {
-                Text("Open Volume:")
-                    .font(.title3.bold())
-                Spacer()
-            }
-            HStack {
-                Text("1,350.97")
-                    .font(.title.bold())
-                Spacer()
-            }
-            HStack {
-                Text("Disputed Swaps:")
-                    .font(.title3.bold())
-                Spacer()
-            }
-            HStack {
-                Text("2")
-                    .font(.title.bold())
-                Spacer()
-            }
+            Text("Governance")
         }
-        .padding()
-        .opacity(Double(getOpacity()))
-    }
-    func getOpacity() -> CGFloat {
-        let progress = -offset * 3 / 100
-        let opacity = 1 - progress
-        return offset < 0 ? opacity : 1
     }
 }
